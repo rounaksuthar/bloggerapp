@@ -1,0 +1,37 @@
+
+<div id="carouselExampleCaptions" class="carousel slide p-3" data-interval="false">
+
+  <!-- Indicators -->
+  <div class="carousel-indicators carousel-buttons">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <!-- Slides -->
+  <div class="carousel-inner">
+    <div class="carousel-item " *ngFor="let item of images,let i = index" [ngClass]="{'active':i===activeCarousel,'':i!==activeCarousel}">
+      <img [src]="item.imagePath" class="d-block w-100">
+      
+      <!-- Dark overlay -->
+      <div class="overlay"></div>
+
+      <!-- Caption -->
+      <div class="carousel-caption d-md-block">
+        <h5 *ngIf="item.imageTitle">{{item.imageTitle}}</h5>
+        <p *ngIf="item.imagePara">{{item.imagePara}}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev carousel-buttons" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next carousel-buttons" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+
+</div>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Easiest Way to Add Input Masks to Your Forms</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="registration.component.scss"> -->
+</head>
+<body>
+    
+    <div class="registration-form">
+        <form [formGroup]="registrationform" (ngSubmit)="onSubmit()">
+            <div class="form-icon">
+                <span><i class="icon icon-user"></i></span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item-required" id="firstname" placeholder="firstname" formControlName = "firstname"
+                [ngClass]="{'error': submitted && registrationform.errors}">
+                <div *ngIf="f['firstname'].touched && f['firstname'].errors; else elseBlock">
+                    <div *ngIf="f['firstname'].touched && f['firstname'].errors?.['required']">
+                        <span class="required-text">*FirstName is required</span>
+                    </div>
+                    <div *ngIf="f['firstname'].touched && f['firstname'].errors?.['minlength']">
+                        <span class="required-text">*FirstName is too small</span>
+                    </div>
+                    <div *ngIf="f['firstname'].touched && f['firstname'].errors?.['pattern']">
+                        <span class="required-text">*FirstName does not contain numbers/special characters</span>
+                    </div>
+                </div>
+                
+                <ng-template #elseBlock>
+                    <span class="required-text">*required</span>
+                </ng-template>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item-required" id="lastname" placeholder="lastname" formControlName="lastname">
+                <div *ngIf="f['lastname'].touched && f['lastname'].errors; else elseBlocklastname">
+                    <div *ngIf="f['lastname'].touched && f['lastname'].errors?.['minlength']">
+                        <span class="required-text">*lastname is too small</span>
+                    </div>
+                    <div *ngIf="f['lastname'].touched && f['lastname'].errors?.['pattern']">
+                        <span class="required-text">*lastname does not contain numbers/special characters</span>
+                    </div>
+                </div>
+                <ng-template #elseBlocklastname>
+                    <span class="required-text"></span>
+                </ng-template>
+                
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item-required" id="username" placeholder="username" formControlName="username" uppercase>
+                <div *ngIf="f['username'].touched && f['username'].errors; else elseBlockusername">
+                    <div *ngIf="f['username'].touched && f['username'].errors?.['required']">
+                        <span class="required-text">*username is required</span>
+                    </div>
+                    <div *ngIf="f['username'].touched && f['username'].errors?.['minlength']">
+                        <span class="required-text">*username is too small</span>
+                    </div>
+                    <div *ngIf="f['username'].touched && f['username'].errors?.['pattern']">
+                        <span class="required-text">*Special Characters are not allowed in Username</span>
+                    </div>
+                </div>
+            </div>    
+            <ng-template #elseBlockusername>
+                <div *ngIf="username_exists.indexOf(f['username'].value.toUpperCase())>-1; else elseBlockusername1">
+                     <span class="required-text">*username already exists</span>
+                </div>
+                <ng-template #elseBlockusername1>
+                    <span class="required-text">*required</span>
+                </ng-template>
+            </ng-template>
+            
+            
+            <div class="form-group">
+                <input type="text" class="form-control item-required" id="email" placeholder="Email" formControlName="Email">
+                <div *ngIf="f['Email'].errors?.['pattern']; else emailelseblock">
+                    <span class="required-text">*Email is not valid</span>
+                </div>
+                <ng-template #emailelseblock>
+                    <span class="required-text"></span>
+                </ng-template>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item-required" id="phone-number" placeholder="Phone Number" formControlName="phonenumber">
+                <div *ngIf="f['phonenumber'].touched && f['phonenumber'].errors; else elseBlockusername">
+                    <div *ngIf="f['phonenumber'].touched && f['phonenumber'].errors?.['required']">
+                        <span class="required-text">*phonenumber is required</span>
+                    </div>
+                    <div *ngIf="f['phonenumber'].touched && f['phonenumber'].errors?.['minlength']">
+                        <span class="required-text">*phonenumber should be on 10 digits</span>
+                    </div>
+                    <div *ngIf="f['phonenumber'].touched && f['phonenumber'].errors?.['maxlength']">
+                        <span class="required-text">*phonenumber should not be greater 10 digits</span>
+                    </div>
+                    <div *ngIf="f['phonenumber'].touched && f['phonenumber'].errors?.['pattern']">
+                        <span class="required-text">*phonenumber is invalid</span>
+                    </div>
+                </div>
+                <ng-template>
+                    <span class="required-text">*required</span>
+                </ng-template>
+                
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </div>
+        </form>
+        <!-- <div class="social-media">
+
+            <h5>Sign up with social media</h5>
+            <div class="social-icons">
+                <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>
+                <a href="#"><i class="icon-social-google" title="Google"></i></a>
+                <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
+            </div>
+        </div> -->
+    </div>
+</body>
+</html>

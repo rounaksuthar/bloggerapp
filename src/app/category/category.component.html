@@ -1,0 +1,8 @@
+<div class="container">
+<h1 class="d-flex justify-content-center">category works!</h1>
+  <div class="row">
+    <div class="col-4 mb-2 d-flex justify-content-center" *ngFor="let item of category" (click)="selected(item)">
+      <button class="btn btn-link w-100 border border-primary btn-lg">{{item}}</button>
+    </div>
+  </div>
+</div>

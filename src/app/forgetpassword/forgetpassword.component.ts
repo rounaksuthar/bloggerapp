@@ -13,7 +13,7 @@ import { MatMenuContent } from "@angular/material/menu";
 export class ForgetpasswordComponent {
 
   username_email_exists=['ABC','XYZ@GMAIL.COM', 'PQR'];
-  otp='1234';
+  otppassword:Number=1234;
   submitted=false;
   passwordsubmit=false;
   resetform:FormGroup;
@@ -21,7 +21,8 @@ export class ForgetpasswordComponent {
   isenablereset:boolean=false;
   isValidEmail:boolean = true;
   ispasswordmatch:boolean=false;
-  validateotp:boolean=false;
+  validateotp:boolean=true;
+  passwordreadonly:boolean=true;
 
   constructor(private fb:FormBuilder){
     this.resetform = this.fb.group({
@@ -29,7 +30,8 @@ export class ForgetpasswordComponent {
     }),
     this.resetpassword = this.fb.group({
       password:['',[Validators.required,Validators.minLength(5),Validators.maxLength(10)]],
-      repassword:['',[Validators.required,Validators.minLength(5),Validators.maxLength(10)]]
+      repassword:['',[Validators.required,Validators.minLength(5),Validators.maxLength(10)]],
+      otp:['',Validators.required,Validators.minLength(6),Validators.maxLength(6)]
     })
   }
   get f(){
@@ -77,8 +79,17 @@ export class ForgetpasswordComponent {
     console.log(pass1+""+ pass2+ " "+this.ispasswordmatch);
   }
 
-  validateotpMatch(){
+  ValidateOTP(){
 
-    
+    const otp1:number = Number(this.resetpassword.value.otp);
+    console.log(otp1);
+    if( otp1 == this.otppassword)
+    {
+      this.passwordreadonly=false;
+    }
+    else{
+      this.passwordreadonly=true;
+    }
+  
   }
 }
